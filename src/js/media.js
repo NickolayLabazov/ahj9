@@ -13,11 +13,9 @@ export default class Media {
   create() {
     this.contDiv = document.createElement('div');
     this.contDiv.setAttribute('class', 'contDiv');
-    // this.parent.appendChild(this.contDiv);
     this.play = document.createElement('div');
     this.play.innerHTML = '&#9658';
     this.contDiv.appendChild(this.play);
-
     if (this.video) {
       this.cont = document.createElement('video');
       this.cont.width = 300;
@@ -38,7 +36,6 @@ export default class Media {
     this.point.setAttribute('class', 'point');
     this.playBack.appendChild(this.point);
     this.cont.src = URL.createObjectURL(this.blob);
-    // this.record();
     this.addListener();
     return this.contDiv;
   }
@@ -48,22 +45,20 @@ export default class Media {
       return;
     }
     try {
-      // console.log(audio.currentTime);
-
       const stream = await navigator.mediaDevices.getUserMedia({
         audio: true,
         video: this.video,
       });
       const recorder = new MediaRecorder(stream);
       const chunks = [];
-      recorder.addEventListener('start', (evt) => {
+      recorder.addEventListener('start', () => {
         console.log('recording started');
       });
       recorder.addEventListener('dataavailable', (evt) => {
         console.log('data available');
         chunks.push(evt.data);
       });
-      recorder.addEventListener('stop', (evt) => {
+      recorder.addEventListener('stop', () => {
         console.log('recording stopped');
         const blob = new Blob(chunks);
         this.cont.src = URL.createObjectURL(blob);

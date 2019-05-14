@@ -9,8 +9,7 @@
     "lint": "eslint .",
     "build": "webpack --mode production",
     "test": "jest --testPathPattern=./test/ --coverage",
-    "coverage": "jest --config ./jest.config.js",
-    "e2e": "jest --testPathPattern=./e2e/"
+    "coverage": "jest --config ./jest.config.js"    
   },
   "repository": "git+https://github.com/NickolayLabazov/ahj33-gallery.git",
   "author": "Nickolay Labazov",
