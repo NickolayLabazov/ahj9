@@ -153,7 +153,6 @@ export default class timeLine {
       this.stream = await navigator.mediaDevices.getUserMedia({
         audio: true,
         video: this.video,
-        // video: true,
       });
       if (this.video) {
         this.duplication = document.createElement('video');
@@ -185,11 +184,6 @@ export default class timeLine {
         this.duplication = null;
       });
       this.recorder.start();
-      /* setTimeout(() => {
-        this.recorder.stop();
-        this.stream.getTracks().forEach(track => track.stop());
-      }, 5000);
-      console.log(this.cont) */
     } catch (e) {
       console.error(e);
     }

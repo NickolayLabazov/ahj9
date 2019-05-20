@@ -40,40 +40,6 @@ export default class Media {
     return this.contDiv;
   }
 
-  async record() {
-    if (!navigator.mediaDevices) {
-      return;
-    }
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({
-        audio: true,
-        video: this.video,
-      });
-      const recorder = new MediaRecorder(stream);
-      const chunks = [];
-      recorder.addEventListener('start', () => {
-        console.log('recording started');
-      });
-      recorder.addEventListener('dataavailable', (evt) => {
-        console.log('data available');
-        chunks.push(evt.data);
-      });
-      recorder.addEventListener('stop', () => {
-        console.log('recording stopped');
-        const blob = new Blob(chunks);
-        this.cont.src = URL.createObjectURL(blob);
-      });
-      recorder.start();
-      setTimeout(() => {
-        recorder.stop();
-        stream.getTracks().forEach(track => track.stop());
-      }, 5000);
-      console.log(this.cont);
-    } catch (e) {
-      console.error(e);
-    }
-  }
-
   addListener() {
     this.play.addEventListener('click', () => {
       this.cont.play();
